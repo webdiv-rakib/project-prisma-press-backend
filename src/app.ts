@@ -1,11 +1,9 @@
-import { Payload } from './../generated/prisma/internal/prismaNamespace';
 import cookieParser from "cookie-parser";
 import express, { Application, Request, Response } from "express";
 import cors from "cors"
 import config from "./config";
 import httpStatus from "http-status";
 import { prisma } from "./lib/prisma";
-import { error } from "node:console";
 import bcrypt from "bcryptjs";
 
 const app: Application = express();
@@ -71,7 +69,7 @@ app.post('/api/users/register', async (req: Request, res: Response) => {
             password: true
         },
         include: {
-            profileId: true
+            profile: true
         }
     });
 
