@@ -3,8 +3,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors"
 import config from "./config";
 import httpStatus from "http-status";
-import { prisma } from "./lib/prisma";
-import bcrypt from "bcryptjs";
+import { userRouter } from "./modules/users/user.route";
 
 const app: Application = express();
 
@@ -29,58 +28,7 @@ app.get('/prisma-press', async (req, res) => {
     })
 })
 
-app.post('/api/users/register', async (req: Request, res: Response) => {
-    const { name, email, password, profilePhoto } = req.body;
-
-    // check if the user exists
-    const isUserExist = await prisma.user.findUnique({
-        where: { email }
-    });
-    if (isUserExist) {
-        throw new Error("User with this email already exists")
-    };
-
-    // encrypted password
-    const hashedPassword = await bcrypt.hash(password, Number(config.bcrypt_salt_rounds));
-
-    // created user
-    const createdUser = await prisma.user.create({
-        data: {
-            name,
-            email,
-            password: hashedPassword,
-        }
-    });
-
-    // create profile
-    await prisma.profile.create({
-        data: {
-            userId: createdUser.id,
-            profilePhoto
-        }
-    });
-
-    const user = await prisma.user.findUnique({
-        where: {
-            id: createdUser.id,
-            email: createdUser.email || email
-        },
-        omit: {
-            password: true
-        },
-        include: {
-            profile: true
-        }
-    });
-
-    res.status(httpStatus.CREATED).json({
-        success: true,
-        statusCode: httpStatus.CREATED,
-        message: 'User Register successfully',
-        data: {
-            user
-        }
-    })
-})
+// app.post('/api', )
+app.use('/api/users',userRouter)
 
 export default app;
