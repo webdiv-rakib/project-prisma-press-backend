@@ -48,10 +48,15 @@ const createUser = catchAsync(async (req: Request, res: Response, next: NextFunc
         message: 'User Registered Successfully',
         data: { user }
     })
+});
+
+const getMyProfile = catchAsync(async () => {
+
 })
 
 export const userController = {
-    createUser
+    createUser,
+    getMyProfile
 }
 
 // will start working soon
