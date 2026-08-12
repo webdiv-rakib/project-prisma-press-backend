@@ -17,7 +17,3 @@ const loginUser = catchAsync(async (req: Request, res: Response, next: NextFunct
 export const authController = {
     loginUser
 }
-
-// working on auth system
-// getting behing and behind day by day
-// will start working for today.
