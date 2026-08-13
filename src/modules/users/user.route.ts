@@ -25,11 +25,11 @@ router.get('/me', (req: Request, res: Response, next: NextFunction) => {
     console.log(req.cookies);
 
     const { accessToken } = req.cookies;
-    const verifiedToken = jwtUtils.verifyToken(accessToken, config.jwt_access_secret)
+    const verifiedToken = jwtUtils.verifyToken(accessToken, config.jwt_access_secret);
 
     if (typeof verifiedToken === "string") {
         throw new Error(verifiedToken)
-    }
+    };
 
     const { email, name, id, role } = verifiedToken
     // const requiredRoles = ["ADMIN","USER","AUTHOR"]
@@ -39,8 +39,8 @@ router.get('/me', (req: Request, res: Response, next: NextFunction) => {
             success: false,
             statusCode: httpStatus.FORBIDDEN,
             message: "Forbidden.You don't have permission to access this resource"
-        })
-    }
+        });
+    };
 
     req.user = {
         email,
