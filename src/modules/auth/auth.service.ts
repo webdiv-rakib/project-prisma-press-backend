@@ -94,8 +94,3 @@ export const authService = {
     loginUser,
     refreshToken
 }
-
-// new module
-// gonna build new model for post and comment
-// lets get back to work
-// will start working
