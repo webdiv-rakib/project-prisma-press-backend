@@ -5,6 +5,8 @@ import config from "./config";
 import httpStatus from "http-status";
 import { userRouter } from "./modules/users/user.route";
 import { authRouter } from "./modules/auth/auth.route";
+import { postRoutes } from "./modules/post/post.route";
+
 
 const app: Application = express();
 
@@ -30,7 +32,8 @@ app.get('/prisma-press', async (req, res) => {
 })
 
 // app.post('/api', )
-app.use('/api/users',userRouter);
-app.use('/api/auth',authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/posts', postRoutes);
 
 export default app;
