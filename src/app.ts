@@ -36,4 +36,6 @@ app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 
+// here i will add another route for the comment api.
+
 export default app;
