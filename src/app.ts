@@ -37,5 +37,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 
 // here i will add another route for the comment api.
+// 2 exam is finished today
 
 export default app;
