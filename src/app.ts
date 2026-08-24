@@ -22,7 +22,7 @@ app.use(cookieParser())
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!')
-})
+});
 
 app.get('/prisma-press', async (req, res) => {
     res.status(httpStatus.CREATED).json({
@@ -30,13 +30,16 @@ app.get('/prisma-press', async (req, res) => {
         author: 'webdib-rakib',
         successs: true
     })
-})
+});
 
 // app.post('/api', )
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
+
+
+// just a comment added.
 
 
 export default app;
