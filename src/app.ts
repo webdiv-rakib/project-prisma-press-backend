@@ -43,6 +43,7 @@ app.use('/api/comments',commentRoutes);
 // getting behing day by day
 // what to do
 // tomorrow is my last exam of 2nd semester
+// wroking on preparation of exam
 
 
 export default app;
