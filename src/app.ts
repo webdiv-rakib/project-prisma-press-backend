@@ -44,6 +44,7 @@ app.use('/api/comments',commentRoutes);
 // what to do
 // tomorrow is my last exam of 2nd semester
 // wroking on preparation of exam
+// today i bought sharee
 
 
 export default app;
