@@ -38,4 +38,5 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
+//final exam finished.
 export default app;
