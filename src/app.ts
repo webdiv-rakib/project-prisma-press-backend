@@ -38,14 +38,4 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
-
-// just a comment added.
-// getting behing day by day
-// what to do
-// tomorrow is my last exam of 2nd semester
-// wroking on preparation of exam
-// today i bought sharee
-// next churi
-
-
 export default app;
