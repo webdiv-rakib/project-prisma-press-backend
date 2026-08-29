@@ -39,4 +39,5 @@ app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
 //final exam finished.
+// chiken fry 
 export default app;
