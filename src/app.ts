@@ -42,4 +42,5 @@ app.use('/api/comments',commentRoutes);
 // chiken fry 
 // will start coding
 // doing nothing
+// wasting time
 export default app;
