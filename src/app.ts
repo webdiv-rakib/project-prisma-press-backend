@@ -38,15 +38,4 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
-//final exam finished.
-// chiken fry 
-// will start coding
-// doing nothing
-// wasting time
-// we catch finsih today
-// new experience
-// i quite
-// tomorrow i will go home
-// tomorrow i must have to go home
-// can't miss tomorrow
 export default app;
