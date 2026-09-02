@@ -1,10 +1,30 @@
 import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 
-const comment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const createComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+
+});
+const getCommentByAuthorId = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+
+});
+const getCommentByPostId = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+
+});
+const updateComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+
+});
+const deleteComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+
+});
+const moderateComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
 });
 
 export const commentController = {
-    comment
+    createComment,
+    getCommentByAuthorId,
+    getCommentByPostId,
+    updateComment,
+    deleteComment,
+    moderateComment
 }
