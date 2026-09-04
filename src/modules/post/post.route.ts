@@ -24,5 +24,6 @@ router.patch('/:postId', postController.updatePost);
 router.delete('/:postId', postController.deletePost);
 
 // i am at my home
+// cant do any coding
 
 export const postRoutes = router;
