@@ -39,4 +39,6 @@ app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
 // not meet yet what so ever
+// will meet Tuesday 
+
 export default app;
