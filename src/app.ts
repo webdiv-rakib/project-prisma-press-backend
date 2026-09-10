@@ -38,15 +38,5 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
-// not meet yet what so ever
-// will meet Tuesday 
-// we will meet tomorrow 
-// i am sooooo excited 
-// trying to be good at
-// what to do go back on track
-// getting behind day by day
-// finally we meet eqch other.
-// doing shits
-// wasting time
-// edition code.
+
 export default app;
