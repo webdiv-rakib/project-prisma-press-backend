@@ -38,5 +38,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
+// will back in hall soon.
 
 export default app;
