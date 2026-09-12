@@ -38,11 +38,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
-// will back in hall soon.
-// just commenting.
-// handling comment
-// today is friday
-// don't know what next 
-// no matter what i will always commit
+
 
 export default app;
