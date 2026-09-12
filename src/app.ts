@@ -38,6 +38,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments',commentRoutes);
 
-
+// removed all commit
 
 export default app;
