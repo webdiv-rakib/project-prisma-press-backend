@@ -1,6 +1,7 @@
 import { prisma } from "../../lib/prisma"
 import { ICreatePostPayload } from "./post.interface"
 
+// create post in Database
 const createPost = async (payload: ICreatePostPayload, userId: string) => {
     const result = await prisma.post.create({
         data: {
@@ -11,6 +12,7 @@ const createPost = async (payload: ICreatePostPayload, userId: string) => {
     return result
 };
 
+// get all post from Database
 const getAllPosts = async () => {
     const posts = await prisma.post.findMany({
         include: {
@@ -24,8 +26,34 @@ const getAllPosts = async () => {
     })
     return posts
 };
-const getPostsById = async () => {
 
+// get post by id from database
+const getPostsById = async (postId: string) => {
+    const post = await prisma.post.findUniqueOrThrow({
+        where: {
+            id: postId
+        }
+    })
+
+    const updatedPost = await prisma.post.update({
+        where: {
+            id: postId
+        },
+        data: {
+            views: {
+                increment: 1
+            }
+        },
+        include: {
+            author: {
+                omit: {
+                    password: true
+                }
+            },
+            comments: true
+        }
+    })
+    return updatedPost
 }
 const updatePost = async () => {
 
@@ -36,8 +64,31 @@ const deletePost = async () => {
 const getPostsStats = async () => {
 
 }
-const getMyPosts = async () => {
 
+
+const getMyPosts = async (authorId: string) => {
+    const result = await prisma.post.findMany({
+        where: {
+            authorId
+        },
+        orderBy: {
+            createdAt: "desc"
+        },
+        include: {
+            comments: true,
+            author: {
+                omit: {
+                    password: true
+                }
+            },
+            _count: {
+                select: {
+                    comments: true
+                }
+            }
+        }
+    });
+    return result
 }
 
 export const postService = {
