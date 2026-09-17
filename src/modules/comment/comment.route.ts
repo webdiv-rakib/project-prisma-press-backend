@@ -18,6 +18,6 @@ const router = Router();
 // router.put('/:commentId/moderate', commentController.moderateComment)
 
 router.post('/', auth(Role.ADMIN, Role.AUTHOR, Role.USER), commentController.createComment);
-
+router.get('/author/:authorId', commentController.getCommentByAuthorId);
 
 export const commentRoutes = router;
