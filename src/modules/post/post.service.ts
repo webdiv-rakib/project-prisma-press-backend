@@ -55,6 +55,8 @@ const getPostsById = async (postId: string) => {
     })
     return updatedPost
 }
+
+// update post by id
 const updatePost = async (postId: string, payload: IUpdatePostPayload, authorId: string, isAdmin: boolean) => {
     const post = await prisma.post.findUniqueOrThrow({
         where: {
@@ -80,6 +82,8 @@ const updatePost = async (postId: string, payload: IUpdatePostPayload, authorId:
     })
     return result
 }
+
+// delete post by id
 const deletePost = async (postId: string, authorId: string, isAdmin: boolean) => {
     const post = await prisma.post.findUniqueOrThrow({
         where: {
@@ -95,11 +99,13 @@ const deletePost = async (postId: string, authorId: string, isAdmin: boolean) =>
         }
     })
 }
+
+// 
 const getPostsStats = async () => {
 
 }
 
-
+// get my post by user login
 const getMyPosts = async (authorId: string) => {
     const result = await prisma.post.findMany({
         where: {

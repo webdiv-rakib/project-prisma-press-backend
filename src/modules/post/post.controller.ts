@@ -93,9 +93,6 @@ const getMyPost = catchAsync(async (req: Request, res: Response, next: NextFunct
     })
 });
 
-
-
-
 export const postController = {
     createPost,
     getAllPosts,
