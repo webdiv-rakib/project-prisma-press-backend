@@ -14,6 +14,7 @@ const createComment = catchAsync(async (req: Request, res: Response, next: NextF
         data: result
     })
 });
+
 const getCommentByAuthorId = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const { authorId } = req.params;
     const result = await commentService.getCommentByAuthorId(authorId as string);
@@ -24,6 +25,7 @@ const getCommentByAuthorId = catchAsync(async (req: Request, res: Response, next
         data: result
     })
 });
+
 const getCommentByPostId = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const { postId } = req.params
     const result = await commentService.getCommentByCommentId(postId as string)
@@ -34,6 +36,7 @@ const getCommentByPostId = catchAsync(async (req: Request, res: Response, next: 
         data: result
     })
 });
+
 const updateComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const user = req.user;
     const { commentId } = req.params;
@@ -47,6 +50,7 @@ const updateComment = catchAsync(async (req: Request, res: Response, next: NextF
         data: result
     })
 });
+
 const deleteComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
 });
