@@ -35,7 +35,17 @@ const getCommentByPostId = catchAsync(async (req: Request, res: Response, next: 
     })
 });
 const updateComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-
+    const user = req.user;
+    const { commentId } = req.params;
+    const authorId = user?.id as string;
+    const payload = req.body;
+    const result = await commentService.updateComment(commentId as string, payload, authorId);
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Comment updated successfully",
+        data: result
+    })
 });
 const deleteComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 

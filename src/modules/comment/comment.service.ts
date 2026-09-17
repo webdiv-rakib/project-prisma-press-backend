@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma";
-import { ICreateCommentPayload } from "./comment.interface";
+import { ICreateCommentPayload, IUpdateCommentPayload } from "./comment.interface";
 
 const createComment = async (authorId: string, payload: ICreateCommentPayload) => {
     await prisma.post.findUniqueOrThrow({
@@ -44,8 +44,25 @@ const getCommentByCommentId = async (postId: string) => {
     })
     return comment
 };
-const updateComment = async () => {
-    
+
+const updateComment = async (commentId: string, data: IUpdateCommentPayload, authorId: string) => {
+    const commentData = await prisma.comment.findUniqueOrThrow({
+        where: {
+            id: commentId,
+            authorId
+        },
+        select: {
+            id: true
+        }
+    });
+    const comment = await prisma.comment.update({
+        where: {
+            id: commentId,
+            authorId
+        },
+        data
+    });
+    return comment
 };
 const deleteComment = async () => {
 
