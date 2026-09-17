@@ -15,19 +15,13 @@ router.get('/', postController.getAllPosts);
 router.get('/stats', postController.getPostsStats);
 
 // get 
-router.get('/my-posts', postController.getMyPost);
+router.get('/my-posts', auth(Role.USER, Role.ADMIN, Role.AUTHOR), postController.getMyPost);
 
 router.get('/:postId', postController.getPostById);
 
-router.patch('/:postId', postController.updatePost);
+router.patch('/:postId', auth(Role.USER, Role.ADMIN, Role.AUTHOR), postController.updatePost);
 
-router.delete('/:postId', postController.deletePost);
+router.delete('/:postId', auth(Role.USER, Role.ADMIN, Role.AUTHOR), postController.deletePost);
 
-// i am at my home
-// cant do any coding
-// tomorrow will meet first 
-// doing nothing.
-// i am soooo excited.
-// she is sooo goooood
 
 export const postRoutes = router;
