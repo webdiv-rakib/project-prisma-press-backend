@@ -36,11 +36,16 @@ const getCommentByAuthorId = async (authorId: string) => {
     return comment
 };
 
-const getCommentByCommentId = async () => {
-
+const getCommentByCommentId = async (postId: string) => {
+    const comment = await prisma.comment.findMany({
+        where: {
+            postId
+        }
+    })
+    return comment
 };
 const updateComment = async () => {
-
+    
 };
 const deleteComment = async () => {
 
