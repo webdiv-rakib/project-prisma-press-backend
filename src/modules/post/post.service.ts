@@ -1,4 +1,4 @@
-import { CommentStatus } from "../../../generated/prisma/enums";
+import { CommentStatus, PostStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma"
 import { ICreatePostPayload, IUpdatePostPayload } from "./post.interface"
 
@@ -179,7 +179,65 @@ const deletePost = async (postId: string, authorId: string, isAdmin: boolean) =>
 
 // 
 const getPostsStats = async () => {
+    const transactionResult = await prisma.$transaction(
+        async (tx) => {
+            const totalPosts = await tx.post.count();
 
+            const totalPublishedPost = await tx.post.count({
+                where: {
+                    status: PostStatus.PUBLISHED
+                }
+            });
+            const totalDraftPost = await tx.post.count({
+                where: {
+                    status: PostStatus.DRAFT
+                }
+            });
+            const totalArchivedPost = await tx.post.count({
+                where: {
+                    status: PostStatus.ARCHIVED
+                }
+            });
+
+            const totalComments = await tx.comment.count();
+
+            const totalApprovedComments = await tx.comment.count({
+                where: {
+                    status: CommentStatus.APPROVED
+                }
+            });
+            const totalRejectedComments = await tx.comment.count({
+                where: {
+                    status: CommentStatus.REJECT
+                }
+            });
+
+            // not a good approach to count that way
+            // const allPosts = await tx.post.findMany();
+            // let totalPostViews = 0;
+            // allPosts.forEach((post) => {
+            //     totalPostViews = totalPostViews + post.views
+            // });
+            const totalPostViewsAggregate = await tx.post.aggregate({
+                _sum: {
+                    views: true
+                }
+            });
+            const totalPostViews = totalPostViewsAggregate._sum.views;
+
+            return {
+                totalPosts,
+                totalPublishedPost,
+                totalDraftPost,
+                totalArchivedPost,
+                totalComments,
+                totalApprovedComments,
+                totalRejectedComments,
+                totalPostViews
+            }
+        }
+    );
+    return transactionResult;
 }
 
 // get my post by user login
