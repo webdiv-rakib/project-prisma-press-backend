@@ -17,7 +17,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\":\"abc10@gmail.com\",\r\n    \"password\":\"12345\"\r\n}",
+              "raw": "{\r\n    \"email\":\"abunayimmohammadrakib@gmail.com\",\r\n    \"password\":\"RakibulHassan1999\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -35,6 +35,41 @@
                 "api",
                 "auth",
                 "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0ipm}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Random\",\r\n    \"email\":\"abc9@gmail.com\",\r\n    \"password\":\"12345\",\r\n    \"profilePhoto\":\"www.google.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/refresh-token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "auth",
+                "refresh-token"
               ]
             }
           },
@@ -57,7 +92,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\":\"Random\",\r\n    \"email\":\"abc9@gmail.com\",\r\n    \"password\":\"12345\",\r\n    \"profilePhoto\":\"www.google.com\"\r\n}",
+              "raw": "{\r\n    \"name\":\"Random\",\r\n    \"email\":\"abunayimmohammadrakib@gmail.com\",\r\n    \"password\":\"RakibulHassan1999\",\r\n    \"profilePhoto\":\"www.google.com\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -126,6 +161,303 @@
                 "api",
                 "users",
                 "my-profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Post",
+      "item": [
+        {
+          "name": "Create Posts",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\":\"what i have lear so far 2\",\r\n    \"content\":\"journey about programming life\",\r\n    \"thumbnail\":\"https://example.com\",\r\n    \"isFeatured\":false,\r\n    \"status\":\"PUBLISHED\",\r\n    \"tags\":[\"typescript\",\"prisma\",\"express\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/posts/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "posts",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Post By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/posts/4bed9b14-bd0c-450b-8aee-51d05b600963",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "posts",
+                "4bed9b14-bd0c-450b-8aee-51d05b600963"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/posts/my-posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "posts",
+                "my-posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update My Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\":\"My Second Post Updated\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/posts/0c12a225-a5c5-4e66-aab7-6c127b7db065",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "posts",
+                "0c12a225-a5c5-4e66-aab7-6c127b7db065"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/posts/f7edf2c1-6aef-43bb-a1a2-01016e337bbd",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "posts",
+                "f7edf2c1-6aef-43bb-a1a2-01016e337bbd"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Post Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/posts/stats",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "posts",
+                "stats"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comment",
+      "item": [
+        {
+          "name": "Create Comments",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"This is a comment\",\r\n  \"postId\": \"f7edf2c1-6aef-43bb-a1a2-01016e337bbd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Comment By Author ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/comments/author/d9d4b60d-2b6b-4159-9725-b0ec43f9c337",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "comments",
+                "author",
+                "d9d4b60d-2b6b-4159-9725-b0ec43f9c337"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Comment By Post ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/comments/f7edf2c1-6aef-43bb-a1a2-01016e337bbd",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "comments",
+                "f7edf2c1-6aef-43bb-a1a2-01016e337bbd"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Comment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"Updated comment text\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/comments/ca43c391-c8bc-4ffc-b851-99bdcada2c82",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "comments",
+                "ca43c391-c8bc-4ffc-b851-99bdcada2c82"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/comments/ca43c391-c8bc-4ffc-b851-99bdcada2c82",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "comments",
+                "ca43c391-c8bc-4ffc-b851-99bdcada2c82"
               ]
             }
           },
