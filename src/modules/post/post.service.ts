@@ -36,52 +36,101 @@ const getPostsById = async (postId: string) => {
     //     }
     // })
 
-    await prisma.post.update({
-        where: {
-            id: postId
-        },
-        data: {
-            views: {
-                increment: 1
-            }
-        },
-        // include: {
-        //     author: {
-        //         omit: {
-        //             password: true
-        //         }
-        //     },
-        //     comments: true
-        // }
-    })
 
-    const post = await prisma.post.findUniqueOrThrow({
-        where: {
-            id: postId
-        },
-        include: {
-            author: {
-                omit: {
-                    password: true
-                }
-            },
+    //=========First Part======================
+    // await prisma.post.update({
+    //     where: {
+    //         id: postId
+    //     },
+    //     data: {
+    //         views: {
+    //             increment: 1
+    //         }
+    //     },
+    //     // include: {
+    //     //     author: {
+    //     //         omit: {
+    //     //             password: true
+    //     //         }
+    //     //     },
+    //     //     comments: true
+    //     // }
+    // })
 
-            comments: {
+
+    //=========Second Part==============
+    // const post = await prisma.post.findUniqueOrThrow({
+    //     where: {
+    //         id: postId
+    //     },
+    //     include: {
+    //         author: {
+    //             omit: {
+    //                 password: true
+    //             }
+    //         },
+
+    //         comments: {
+    //             where: {
+    //                 status: CommentStatus.APPROVED
+    //             },
+    //             orderBy: {
+    //                 createdAt: "desc"
+    //             }
+    //         },
+    //         _count: {
+    //             select: {
+    //                 comments: true
+    //             }
+    //         }
+    //     }
+    // })
+    // return post
+
+    //working on transaction and rollback
+    const transactionResult = await prisma.$transaction(
+        async (tx) => {
+            await tx.post.update({
                 where: {
-                    status: CommentStatus.APPROVED
+                    id: postId
                 },
-                orderBy: {
-                    createdAt: "desc"
+                data: {
+                    views: {
+                        increment: 1
+                    }
                 }
-            },
-            _count: {
-                select: {
-                    comments: true
+            });
+            // throw new Error('something wrong happened')
+            const post = await tx.post.findUniqueOrThrow({
+                where: {
+                    id: postId
+                },
+                include: {
+                    author: {
+                        omit: {
+                            password: true
+                        }
+                    },
+
+                    comments: {
+                        where: {
+                            status: CommentStatus.APPROVED
+                        },
+                        orderBy: {
+                            createdAt: "desc"
+                        }
+                    },
+                    _count: {
+                        select: {
+                            comments: true
+                        }
+                    }
                 }
-            }
+            });
+            return post
         }
-    })
-    return post
+    );
+    return transactionResult;
 }
 
 // update post by id
