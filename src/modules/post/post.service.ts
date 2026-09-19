@@ -16,6 +16,20 @@ const createPost = async (payload: ICreatePostPayload, userId: string) => {
 // get all post from Database
 const getAllPosts = async () => {
     const posts = await prisma.post.findMany({
+        // where:{
+        //     title:"My Second Post",
+        //     content:"Messi"
+        // },
+        where: {
+            AND: [
+                {
+                    title: "My Second Post"
+                },
+                {
+                    content: "Messi"
+                }
+            ]
+        },
         include: {
             author: {
                 omit: {
