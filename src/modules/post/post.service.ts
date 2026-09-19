@@ -65,36 +65,47 @@ const getAllPosts = async () => {
         // },
 
         //combining search(OR) and filtering(AND)
-        where: {
-            //filtering with AND operator
-            AND: [
-                {
-                    //searching with OR operator
-                    OR: [
-                        {
-                            title: {
-                                contains: "Ron",
-                                mode: "insensitive"
-                            }
-                        },
-                        {
-                            content: {
-                                contains: "Ron",
-                                mode: "insensitive"
-                            }
-                        }
-                    ]
-                },
+        // where: {
+        //     //filtering with AND operator
+        //     AND: [
+        //         {
+        //             //searching with OR operator
+        //             OR: [
+        //                 {
+        //                     title: {
+        //                         contains: "Ron",
+        //                         mode: "insensitive"
+        //                     }
+        //                 },
+        //                 {
+        //                     content: {
+        //                         contains: "Ron",
+        //                         mode: "insensitive"
+        //                     }
+        //                 }
+        //             ]
+        //         },
 
-                //filtering
-                {
-                    title: "Christiano Ronaldo"
-                },
-                {
-                    content: "Ronald  "
-                }
-            ]
+        //         //filtering
+        //         {
+        //             title: "Christiano Ronaldo"
+        //         },
+        //         {
+        //             content: "Ronald  "
+        //         }
+        //     ]
 
+        // },
+
+        //pagination
+        take: 1,
+        skip: 1,
+
+        //sorting with asc and desc
+        orderBy: {
+            createdAt: 'desc',
+            title: "asc",
+            content: "asc"
         },
         include: {
             author: {
