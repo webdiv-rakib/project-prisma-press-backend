@@ -98,15 +98,15 @@ const getAllPosts = async () => {
         // },
 
         //pagination
-        take: 1,
-        skip: 1,
+        // take: 1,
+        // skip: 1,
 
         //sorting with asc and desc
-        orderBy: {
-            createdAt: 'desc',
-            title: "asc",
-            content: "asc"
-        },
+        // orderBy: {
+        //     createdAt: 'desc',
+        //     title: "asc",
+        //     content: "asc"
+        // },
         include: {
             author: {
                 omit: {
