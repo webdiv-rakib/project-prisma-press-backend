@@ -16,19 +16,85 @@ const createPost = async (payload: ICreatePostPayload, userId: string) => {
 // get all post from Database
 const getAllPosts = async () => {
     const posts = await prisma.post.findMany({
+        //=====fintering/exact match without AND operator
         // where:{
         //     title:"My Second Post",
         //     content:"Messi"
         // },
+
+        //=====fintering/exact match with AND operator
+        // where: {
+        //     AND: [
+        //         {
+        //             title: "My Second Post"
+        //         },
+        //         {
+        //             content: "Messi"
+        //         }
+        //     ]
+        // },
+
+        //===searching or partial match
+        // where: {
+        //     title: {
+        //         contains: "Ronaldo",
+        //         mode: 'insensitive'
+        //     },
+        //     content: {
+        //         contains: "Ronaldo"
+        //     }
+        // },
+
+        // searching with OR operator
+        // where: {
+        //     OR: [
+        //         {
+        //             title: {
+        //                 contains: "Ronaldo",
+        //                 mode: "insensitive"
+        //             },
+
+        //         },
+        //         {
+        //             content: {
+        //                 contains: "Ronaldo",
+        //                 mode: "insensitive"
+        //             }
+        //         }
+        //     ]
+        // },
+
+        //combining search(OR) and filtering(AND)
         where: {
+            //filtering with AND operator
             AND: [
                 {
-                    title: "My Second Post"
+                    //searching with OR operator
+                    OR: [
+                        {
+                            title: {
+                                contains: "Ron",
+                                mode: "insensitive"
+                            }
+                        },
+                        {
+                            content: {
+                                contains: "Ron",
+                                mode: "insensitive"
+                            }
+                        }
+                    ]
+                },
+
+                //filtering
+                {
+                    title: "Christiano Ronaldo"
                 },
                 {
-                    content: "Messi"
+                    content: "Ronald  "
                 }
             ]
+
         },
         include: {
             author: {
