@@ -2,6 +2,7 @@ import { title } from "node:process";
 import { CommentStatus, PostStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma"
 import { ICreatePostPayload, IPostQuery, IUpdatePostPayload } from "./post.interface"
+import { PostWhereInput } from "../../../generated/prisma/models";
 
 // create post in Database
 const createPost = async (payload: ICreatePostPayload, userId: string) => {
@@ -22,6 +23,59 @@ const getAllPosts = async (query: IPostQuery) => {
 
     const sortBy = query.sortBy ? query.sortBy : "createdAt";
     const sortOrder = query.sortOrder ? query.sortOrder : "desc";
+
+    const tags = query.tags ? JSON.parse(query.tags as string) : null
+    const tagsArray = Array.isArray(tags) ? tags : []
+
+    const andCondition: PostWhereInput[] = [];
+    if (query.searchTerm) {
+        andCondition.push({
+            OR: [{
+                title: {
+                    contains: query.searchTerm,
+                    mode: "insensitive"
+                }
+            },
+            {
+                content: {
+                    contains: query.searchTerm,
+                    mode: "insensitive"
+                }
+            }]
+        })
+    }
+    if (query.title) {
+        andCondition.push({
+            title: query.title
+        })
+    }
+    if (query.content) {
+        andCondition.push({
+            content: query.content
+        })
+    }
+    if (query.authorId) {
+        andCondition.push({
+            authorId: query.authorId
+        })
+    }
+    if (query.isFeatured) {
+        andCondition.push({
+            isFeatured: Boolean(query.isFeatured)
+        })
+    }
+    if (query.tags) {
+        andCondition.push({
+            tags: {
+                hasSome: tagsArray
+            }
+        })
+    }
+    if (query.status) {
+        andCondition.push({
+            status: query.status
+        })
+    }
     const posts = await prisma.post.findMany({
         //=====fintering/exact match without AND operator
         // where:{
@@ -115,31 +169,36 @@ const getAllPosts = async (query: IPostQuery) => {
         //     content: "asc"
         // },
 
+        //dynamic searching,filtering,pagination and sorting
+        // where: {
+        //     AND: [
+        //         query.searchTerm ? {
+        //             OR: [
+        //                 {
+        //                     title: {
+        //                         contains: query.searchTerm,
+        //                         mode: "insensitive"
+        //                     }
+        //                 },
+        //                 {
+        //                     content: {
+        //                         contains: query.searchTerm,
+        //                         mode: "insensitive"
+        //                     }
+        //                 }
+        //             ]
+        //         } : {},
+
+        //         //title filtering
+        //         query.title ? { title: query.title } : {},
+
+        //         //content filtering
+        //         query.content ? { content: query.content } : {}
+        //     ]
+        // },
+
         where: {
-            AND: [
-                query.searchTerm ? {
-                    OR: [
-                        {
-                            title: {
-                                contains: query.searchTerm,
-                                mode: "insensitive"
-                            }
-                        },
-                        {
-                            content: {
-                                contains: query.searchTerm,
-                                mode: "insensitive"
-                            }
-                        }
-                    ]
-                } : {},
-
-                //title filtering
-                query.title ? { title: query.title } : {},
-
-                //content filtering
-                query.content ? { content: query.content } : {}
-            ]
+            AND: andCondition
         },
         //pagination
         take: limit,
