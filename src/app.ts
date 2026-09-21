@@ -7,6 +7,8 @@ import { userRouter } from "./modules/users/user.route";
 import { authRouter } from "./modules/auth/auth.route";
 import { postRoutes } from "./modules/post/post.route";
 import { commentRoutes } from "./modules/comment/comment.route";
+import { notFound } from "./middlewares/notFount";
+import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 
 
 const app: Application = express();
@@ -36,6 +38,15 @@ app.get('/prisma-press', async (req, res) => {
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
-app.use('/api/comments',commentRoutes);
+app.use('/api/comments', commentRoutes);
+
+// app.use((req: Request, res: Response) => {
+//     res.status(404).json({
+//         message: "Route Not Found",
+//         path: req.originalUrl
+//     })
+// })
+app.use(notFound);
+app.use(globalErrorHandler)
 
 export default app;
