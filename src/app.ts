@@ -9,8 +9,6 @@ import { postRoutes } from "./modules/post/post.route";
 import { commentRoutes } from "./modules/comment/comment.route";
 import { notFound } from "./middlewares/notFount";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
-import { subscriptionRoutes } from "./modules/subscription/subscription.route";
-import { stripe } from "./lib/stripe";
 
 
 const app: Application = express();
@@ -67,7 +65,7 @@ app.use(cors({
 //     response.send();
 // });
 
-app.use('/api/subscription/webhook',express.raw({type:'application/json'}))
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
@@ -90,7 +88,7 @@ app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
-app.use('/api/subscription', subscriptionRoutes)
+
 
 // app.use((req: Request, res: Response) => {
 //     res.status(404).json({
