@@ -10,7 +10,7 @@ import { commentRoutes } from "./modules/comment/comment.route";
 import { notFound } from "./middlewares/notFount";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { subscriptionRoutes } from "./modules/subscription/subscription.route";
-import { stripe } from "./lib/stripe";
+
 
 
 const app: Application = express();
@@ -68,7 +68,7 @@ app.use(cors({
 //     response.send();
 // })
 
-app.use('/api/subscription/webhook',express.raw({ type: 'application/json' }));
+app.use('/api/subscription/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
