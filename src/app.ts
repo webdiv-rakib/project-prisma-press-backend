@@ -9,6 +9,7 @@ import { postRoutes } from "./modules/post/post.route";
 import { commentRoutes } from "./modules/comment/comment.route";
 import { notFound } from "./middlewares/notFount";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
+import { subscriptionRoutes } from "./modules/subscription/subscription.route";
 
 
 const app: Application = express();
@@ -17,6 +18,13 @@ app.use(cors({
     origin: config.app_url,
     credentials: true
 }))
+
+
+
+
+
+
+
 
 // const endpointSecret = config.stripe_webhook_secret;
 // app.post('/api/subscription/webhook', express.raw({ type: 'application/json' }), (request, response) => {
@@ -88,6 +96,7 @@ app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/subscription', subscriptionRoutes);
 
 
 // app.use((req: Request, res: Response) => {
