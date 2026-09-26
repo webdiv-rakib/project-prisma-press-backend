@@ -55,7 +55,7 @@ const handleWebhook = async (payload: Buffer, signature: string) => {
 
     switch (event.type) {
         case 'checkout.session.completed':
-
+            console.log("Hlw", event.data.object);
             break;
         case 'customer.subscription.updated':
 
