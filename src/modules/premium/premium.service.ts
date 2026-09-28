@@ -66,6 +66,7 @@ const getPremiumContent = async (query: IPostQuery) => {
     andCondition.push({
         isPremium: true
     })
+    
     const posts = await prisma.post.findMany({
         where: {
             AND: andCondition
