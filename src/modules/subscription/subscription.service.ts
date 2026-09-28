@@ -1,8 +1,6 @@
-import Stripe from "stripe";
 import config from "../../config";
 import { prisma } from "../../lib/prisma";
 import { stripe } from "../../lib/stripe";
-import { SubscriptionStatus } from "../../../generated/prisma/enums";
 import { handlCheckoutCompleted, handleChangeSubscription } from "../../utils/subscription.utils";
 
 const createCheckoutSession = async (userId: string) => {
@@ -47,7 +45,6 @@ const createCheckoutSession = async (userId: string) => {
         paymentUrl: transactionResult
     }
 };
-
 
 const handleWebhook = async (payload: Buffer, signature: string) => {
     const endpointSecret = config.stripe_webhook_secret
@@ -130,9 +127,23 @@ const handleWebhook = async (payload: Buffer, signature: string) => {
     // }
 };
 
+const getSubscriptionStatus = async (userId: string) => {
+    const isSubscriptionExist = await prisma.subscription.findUnique({
+        where: {
+            userId
+        }
+    });
+    const isActive = isSubscriptionExist?.status === "ACTIVE" && isSubscriptionExist.currentPeriodEnd && new Date(isSubscriptionExist.currentPeriodEnd) > new Date();
 
+    return {
+        status: isSubscriptionExist?.status,
+        isSubscribed: isActive,
+        currentPeriodEnd: isSubscriptionExist?.currentPeriodEnd
+    }
+}
 
 export const subscriptionService = {
     createCheckoutSession,
-    handleWebhook
+    handleWebhook,
+    getSubscriptionStatus
 }
