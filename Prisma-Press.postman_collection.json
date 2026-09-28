@@ -17,7 +17,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\":\"abunayimmohammadrakib@gmail.com\",\r\n    \"password\":\"RakibulHassan1999\"\r\n}",
+              "raw": "{\r\n    \"email\": \"abc7@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -178,7 +178,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\":\"what i have lear so far 2\",\r\n    \"content\":\"journey about programming life\",\r\n    \"thumbnail\":\"https://example.com\",\r\n    \"isFeatured\":false,\r\n    \"status\":\"PUBLISHED\",\r\n    \"tags\":[\"typescript\",\"prisma\",\"express\"]\r\n}",
+              "raw": "{\r\n    \"title\": \"My Second Premium Post\",\r\n    \"content\": \"journey about programming life\",\r\n    \"thumbnail\": \"https://example.com\",\r\n    \"isFeatured\": false,\r\n    \"isPremium\": true,\r\n    \"status\": \"PUBLISHED\",\r\n    \"tags\": [\r\n        \"typescript\",\r\n        \"prisma\",\r\n        \"express\"\r\n    ]\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -227,7 +227,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:5000/api/posts/4bed9b14-bd0c-450b-8aee-51d05b600963",
+              "raw": "http://localhost:5000/api/posts/2d036568-6834-4326-8089-55cc43c57461",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -236,7 +236,7 @@
               "path": [
                 "api",
                 "posts",
-                "4bed9b14-bd0c-450b-8aee-51d05b600963"
+                "2d036568-6834-4326-8089-55cc43c57461"
               ]
             }
           },
@@ -347,7 +347,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"content\": \"This is a comment\",\r\n  \"postId\": \"f7edf2c1-6aef-43bb-a1a2-01016e337bbd\"\r\n}",
+              "raw": "{\r\n  \"content\": \"This is a comment 4\",\r\n  \"postId\": \"f7edf2c1-6aef-43bb-a1a2-01016e337bbd\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -458,6 +458,109 @@
                 "api",
                 "comments",
                 "ca43c391-c8bc-4ffc-b851-99bdcada2c82"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Moderate Comment",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"REJECT\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/comments/ca17120f-36e6-4857-9a63-539e6e34a3a2/moderate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "comments",
+                "ca17120f-36e6-4857-9a63-539e6e34a3a2",
+                "moderate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subscriptionn",
+      "item": [
+        {
+          "name": "Create Checkout Link",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/subscription/checkout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "subscription",
+                "checkout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Subscription Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/subscription/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "subscription",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Premium Posts",
+      "item": [
+        {
+          "name": "Get Premium Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/premium",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "premium"
               ]
             }
           },
