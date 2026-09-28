@@ -35,4 +35,4 @@ const handleWebhook = catchAsync(
 export const subscriptionController = {
     createCheckoutSession,
     handleWebhook
-}
+};
