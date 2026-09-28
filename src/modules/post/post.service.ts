@@ -1,4 +1,3 @@
-import { title } from "node:process";
 import { CommentStatus, PostStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma"
 import { ICreatePostPayload, IPostQuery, IUpdatePostPayload } from "./post.interface"
@@ -6,6 +5,17 @@ import { PostWhereInput } from "../../../generated/prisma/models";
 
 // create post in Database
 const createPost = async (payload: ICreatePostPayload, userId: string) => {
+    const user = await prisma.user.findUniqueOrThrow({
+        where: {
+            id: userId,
+        },
+        include: {
+            subscription: true
+        }
+    })
+    if (payload.isPremium && user.subscription?.status !== "ACTIVE") {
+        throw new Error("You are not premium user so you can't create premium post");
+    };
     const result = await prisma.post.create({
         data: {
             ...payload,
@@ -76,6 +86,11 @@ const getAllPosts = async (query: IPostQuery) => {
             status: query.status
         })
     }
+
+    andCondition.push({
+        isPremium: false
+    });
+
     const posts = await prisma.post.findMany({
         //=====fintering/exact match without AND operator
         // where:{
@@ -218,7 +233,21 @@ const getAllPosts = async (query: IPostQuery) => {
             comments: true
         }
     })
-    return posts
+
+    const totalPostCount = await prisma.post.count({
+        where: {
+            AND: andCondition
+        }
+    })
+    return {
+        data: posts,
+        meta: {
+            page: page,
+            limit: limit,
+            total: totalPostCount,
+            totalPages: Math.ceil(totalPostCount / limit)
+        }
+    }
 };
 
 // get post by id from database
@@ -296,7 +325,8 @@ const getPostsById = async (postId: string) => {
             // throw new Error('something wrong happened')
             const post = await tx.post.findUniqueOrThrow({
                 where: {
-                    id: postId
+                    id: postId,
+                    isPremium: false
                 },
                 include: {
                     author: {
